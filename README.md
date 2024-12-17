@@ -28,7 +28,7 @@ To integrate this package into your Flutter project, follow these steps:
 
    ```yaml
    dependencies:
-     currency_converter_pro: ^0.0.1
+     currency_converter_pro: ^0.0.2
    ```
 
 2. **Install Dependencies**

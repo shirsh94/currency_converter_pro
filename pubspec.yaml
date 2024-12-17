@@ -1,6 +1,6 @@
 name: currency_converter_pro
 description: "User-friendly Currency Converter app using CurrencyConverterPro for real-time conversions."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/shirsh94/currency_converter_pro/
 
 environment:
