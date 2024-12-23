@@ -2,7 +2,7 @@
 
 A simple and user-friendly **Currency Converter** Flutter application that allows users to select currencies, input an amount, and convert it to their desired target currency. The app leverages the **CurrencyConverterPro** plugin to fetch real-time exchange rates and perform accurate currency conversion.
 
-(https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/img.png)
+![logo Screen](https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/logo.png)
 ---
 
 ## Features
