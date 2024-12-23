@@ -2,6 +2,7 @@
 
 A simple and user-friendly **Currency Converter** Flutter application that allows users to select currencies, input an amount, and convert it to their desired target currency. The app leverages the **CurrencyConverterPro** plugin to fetch real-time exchange rates and perform accurate currency conversion.
 
+(https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/img.png)
 ---
 
 ## Features
@@ -28,7 +29,7 @@ To integrate this package into your Flutter project, follow these steps:
 
    ```yaml
    dependencies:
-     currency_converter_pro: ^0.0.2
+     currency_converter_pro: ^0.0.5
    ```
 
 2. **Install Dependencies**
@@ -55,70 +56,161 @@ To integrate this package into your Flutter project, follow these steps:
 
 ## Full Code Example
    ```dart
-   import 'package:flutter/material.dart';
-   import 'package:currency_converter_pro/currency_converter_pro.dart';
+import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:flutter/services.dart';
+import 'package:currency_converter_pro/currency_converter_pro.dart';
 
-   void main() {
-     runApp(const MyApp());
-   }
+void main() {
+   runApp(const MyApp());
+}
 
-   class MyApp extends StatefulWidget {
-     const MyApp({super.key});
+class MyApp extends StatefulWidget {
+   const MyApp({super.key});
 
-     @override
-     State<MyApp> createState() => _MyAppState();
-   }
+   @override
+   State<MyApp> createState() => _MyAppState();
+}
 
-   class _MyAppState extends State<MyApp> {
-     final _currencyConverterProPlugin = CurrencyConverterPro();
-     final TextEditingController _amountController = TextEditingController();
-     String _convertedAmount = '';
-     String _fromCurrency = 'usd';
-     String _toCurrency = 'inr';
+class _MyAppState extends State<MyApp> {
+   final TextEditingController _amountController = TextEditingController();
 
-     Future<void> _convertCurrency() async {
-       final double amount = double.tryParse(_amountController.text) ?? 0;
-       try {
+   String _convertedAmount = '';
+   String _fromCurrency = 'usd';
+   String _toCurrency = 'inr';
+   final List<String> _currencies = ['usd', 'inr', 'eur', 'gbp', 'jpy', 'aud', 'cad'];
+
+   Future<void> _convertCurrency() async {
+      final double amount = double.tryParse(_amountController.text) ?? 0;
+      try {
+         final _currencyConverterProPlugin = CurrencyConverterPro();
          final result = await _currencyConverterProPlugin.convertCurrency(
-           amount: amount,
-           fromCurrency: _fromCurrency,
-           toCurrency: _toCurrency,
+            amount: amount,
+            fromCurrency: _fromCurrency,
+            toCurrency: _toCurrency,
          );
          setState(() {
-           _convertedAmount = result.toStringAsFixed(2);
+            _convertedAmount = result.toStringAsFixed(2);
+            print("Converted Amount $_convertedAmount");
          });
-       } catch (e) {
+      } catch (e) {
          setState(() {
-           _convertedAmount = 'Error: \$e';
+            _convertedAmount = 'Error: \$e';
          });
-       }
-     }
-
-     @override
-     Widget build(BuildContext context) {
-       return MaterialApp(
-         home: Scaffold(
-           appBar: AppBar(title: const Text('Currency Converter Pro')),
-           body: Padding(
-             padding: const EdgeInsets.all(16.0),
-             child: Column(
-               children: [
-                 TextField(
-                   controller: _amountController,
-                   decoration: const InputDecoration(labelText: 'Enter Amount'),
-                 ),
-                 ElevatedButton(
-                   onPressed: _convertCurrency,
-                   child: const Text('Convert'),
-                 ),
-                 Text('Converted Amount: \$_convertedAmount'),
-               ],
-             ),
-           ),
-         ),
-       );
-     }
+      }
    }
+
+   @override
+   Widget build(BuildContext context) {
+      return MaterialApp(
+         home: Scaffold(
+            appBar: AppBar(
+               title: const Text('Currency Converter'),
+               backgroundColor: Colors.blue,
+            ),
+            body: Container(
+               padding: const EdgeInsets.all(16.0),
+               child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                     const Text(
+                        'Currency Converter',
+                        style: TextStyle(
+                           fontSize: 24,
+                           fontWeight: FontWeight.bold,
+                           color: Colors.blue,
+                        ),
+                        textAlign: TextAlign.center,
+                     ),
+                     const SizedBox(height: 20),
+                     Row(
+                        children: [
+                           Expanded(
+                              child: DropdownButtonFormField<String>(
+                                 value: _fromCurrency,
+                                 items: _currencies.map((String currency) {
+                                    return DropdownMenuItem<String>(
+                                       value: currency,
+                                       child: Text(currency.toUpperCase()),
+                                    );
+                                 }).toList(),
+                                 onChanged: (value) {
+                                    setState(() {
+                                       _fromCurrency = value ?? 'usd';
+                                    });
+                                 },
+                                 decoration: const InputDecoration(
+                                    labelText: 'From Currency',
+                                    border: OutlineInputBorder(),
+                                 ),
+                              ),
+                           ),
+                           const SizedBox(width: 10),
+                           const Icon(Icons.swap_horiz, size: 30, color: Colors.blue),
+                           const SizedBox(width: 10),
+                           Expanded(
+                              child: DropdownButtonFormField<String>(
+                                 value: _toCurrency,
+                                 items: _currencies.map((String currency) {
+                                    return DropdownMenuItem<String>(
+                                       value: currency,
+                                       child: Text(currency.toUpperCase()),
+                                    );
+                                 }).toList(),
+                                 onChanged: (value) {
+                                    setState(() {
+                                       _toCurrency = value ?? 'inr';
+                                    });
+                                 },
+                                 decoration: const InputDecoration(
+                                    labelText: 'To Currency',
+                                    border: OutlineInputBorder(),
+                                 ),
+                              ),
+                           ),
+                        ],
+                     ),
+                     const SizedBox(height: 20),
+                     TextField(
+                        controller: _amountController,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                           labelText: 'Enter Amount',
+                           border: OutlineInputBorder(),
+                           prefixIcon: Icon(Icons.confirmation_number, color: Colors.blue),
+                        ),
+                     ),
+                     const SizedBox(height: 20),
+                     ElevatedButton(
+                        onPressed: _convertCurrency,
+                        style: ElevatedButton.styleFrom(
+                           backgroundColor: Colors.blue,
+                           padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        ),
+                        child: const Text(
+                           'Convert Currency',
+                           style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                     ),
+                     const SizedBox(height: 20),
+                     Text(
+                        _convertedAmount.isEmpty
+                                ? 'Converted Amount will appear here'
+                                : 'Converted Amount: $_convertedAmount $_toCurrency',
+                        style: const TextStyle(
+                           fontSize: 20,
+                           fontWeight: FontWeight.bold,
+                           color: Colors.blue,
+                        ),
+                        textAlign: TextAlign.center,
+                     ),
+                  ],
+               ),
+            ),
+         ),
+      );
+   }
+}
    ```
 
 ---

@@ -4,8 +4,6 @@
 // ignore: avoid_web_libraries_in_flutter
 
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import 'package:web/web.dart' as web;
-
 import 'currency_converter_pro_platform_interface.dart';
 
 /// A web implementation of the CurrencyConverterProPlatform of the CurrencyConverterPro plugin.
@@ -20,7 +18,6 @@ class CurrencyConverterProWeb extends CurrencyConverterProPlatform {
   /// Returns a [String] containing the version of the platform.
   @override
   Future<String?> getPlatformVersion() async {
-    final version = web.window.navigator.userAgent;
-    return version;
+    return "0";
   }
 }
