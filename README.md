@@ -2,7 +2,7 @@
 
 A simple and user-friendly **Currency** and **Crypto Currency** Converter Flutter application that allows users to convert currencies and crypto currencies, input an amount, and convert it to their desired target currency or crypto currency. The app leverages the CurrencyConverterPro plugin to fetch real-time exchange rates and perform accurate conversions.
 
-![logo Screen](https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/screenshot.png)
+![logo Screen](https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/logo.png)
 ---
 
 ## Features
@@ -25,9 +25,7 @@ A simple and user-friendly **Currency** and **Crypto Currency** Converter Flutte
 ---
 
 ## Screenshots
-
-![Home Screen](https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/img.png)
-
+| ![Screenshot 1](https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/screenshot.png) | ![Screenshot 2](https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/screenshot_crypto.png) |
 ---
 
 ## Getting Started
