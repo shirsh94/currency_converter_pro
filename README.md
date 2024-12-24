@@ -27,6 +27,9 @@ A simple and user-friendly **Currency** and **Crypto Currency** Converter Flutte
 ## Screenshots
 | ![Screenshot 1](https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/screenshot.png) | ![Screenshot 2](https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/screenshot_crypto.png)
 
+
+| ![Screenshot 1](https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/screenshot.png?raw=true) | ![Screenshot 2](https://raw.githubusercontent.com/shirsh94/currency_converter_pro/refs/heads/main/example/assets/screenshot_crypto.png?raw=true) |
+|----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
 ---
 
 ## Getting Started
