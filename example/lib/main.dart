@@ -311,7 +311,12 @@ class _CryptoConverterScreenState extends State<CryptoConverterScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          Text('Equivalent: ${convertedAmount.toStringAsFixed(6)} $toCrypto'),
+
+          Text('Equivalent: ${convertedAmount.toStringAsFixed(6)} $toCrypto', style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+          )),
         ],
       ),
     );
